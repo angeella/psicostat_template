@@ -1,29 +1,29 @@
 ---
 authors:
 - admin
-bio: My research interests include distributed robotics, mobile computing and programmable
-  matter.
+bio: My research interests include Multiple Testing problem and Procrustes technique, generally statistical methods in the Neuroscience field.
 education:
   courses:
-  - course: PhD in Artificial Intelligence
-    institution: Stanford University
-    year: 2012
-  - course: MEng in Artificial Intelligence
-    institution: Massachusetts Institute of Technology
-    year: 2009
-  - course: BSc in Artificial Intelligence
-    institution: Massachusetts Institute of Technology
-    year: 2008
-email: "" #mettere la mail qui
+  - course: PhD in Statistical Science
+    institution: University of Padua
+    year: 2017
+  - course: MSc in Statistical Science
+    institution: University of Padua
+    year: 2016
+  - course: BSc in Statistical Science
+    institution: University of Padua
+    year: 2013
+email: ""
 interests:
-- Artificial Intelligence
-- Computational Linguistics
-- Information Retrieval
-name: Nome e Cognome
+- Multiple testing
+- Permutation test
+- Procrustes solution
+- Statistic applied in Neuroscience
+name: Angela Andreella
 organizations:
-- name: University of Padova
-  url: "https://www.unipd.it/en/"
-role: Professor of Artificial Intelligence
+- name: Universiy of Padua
+  url: ""
+role: PhD student at University of Padua
 social:
 - icon: envelope
   icon_pack: fas
@@ -33,7 +33,7 @@ social:
   link: https://twitter.com/GeorgeCushen
 - icon: google-scholar
   icon_pack: ai
-  link: https://scholar.google.co.uk/citations?user=sIwtMXoAAAAJ
+  link: https://scholar.google.com/citations?user=SlEF5W4AAAAJ&hl=it
 - icon: github
   icon_pack: fab
   link: https://github.com/gcushen
