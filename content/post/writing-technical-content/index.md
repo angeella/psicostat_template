@@ -2,264 +2,172 @@
 date: "2019-07-12"
 diagram: true
 image:
-  caption: 'Image credit: [**John Moeses Bauan**](https://unsplash.com/photos/OGZtQF8iC0g)'
+  caption: ''
   placement: 3
+markup: mmark
 math: true
-title: Writing technical content in Academic
-projects: [suggested_bayesian_papers]
+title: Multidimensional scaling having fMRI data
+subtitle: Short tutorial about multidimensional scaling having fMRI data
+summary: Short tutorial about multidimensional scaling having fMRI data
+tags: ["MDS", "fMRI", "Python"]
 ---
 
-Academic is designed to give technical content creators a seamless experience. You can focus on the content and Academic handles the rest.
+# Introduction
 
-**Highlight your code snippets, take notes on math classes, and draw diagrams from textual representation.**
+In this tutorial, the aim is to show a simple application of **multidimensional scaling techniques** having **fMRI data**. You can download the entire dataset from the [OpenfMRI](https://openfmri.org/dataset/ds000105/) website that provides free access to neuroimaging datasets. 
+However, in this short tutorial, we will analyze the fMRI data of 5 subjects. Each subject has 12 runs, and each run is composed of 121 scans.  During each scan, the individual is subjected to a 24-seconds stimuli followed by a 12-seconds pause. The stimulus consists of the visualization of certain objects, people, or animals images. In particular, 8 different categories of grey-scale images of houses, cats, bottles, nonsense patterns, chairs, scissors, shoes, and faces were used. For more details, please see the [OpenfMRI](https://openfmri.org/dataset/ds000105/) website.
 
-On this page, you'll find some examples of the types of technical content that can be rendered with Academic.
+The aim is to represent the **brain activities** described by voxels in two dimensions, discovering some clusters that correspond to the brain activities due to the different stimuli. Therefore, the **multidimensional scaling techniques** is applied.
 
-## Examples
+# Data
 
-### Code
+You can download directly the data described previously from this [link](https://drive.google.com/open?id=1DceMW-cUf-c3j3jA3Djh8oIL2bhM8U-z). You will find 5 .Rdata files, one for each subject analyzed. 
+Each .Rdata file is a list of 12 numeric elements, one for each run. Each element is a matrix with dimension $ (40 \times 64 \times 64) \times 121 $, where the rows represent the number of voxels and the columns the number of scans.  For more details about the data preprocessing, please send me an email (angelaDOTandreellaATstatDOTunipdDOTit).
 
-Academic supports a Markdown extension for highlighting code syntax. You can enable this feature by toggling the `highlight` option in your `config/_default/params.toml` file.
+So, first of all, you must download the libraries and the .rData files:
 
-    ```python
-    import pandas as pd
-    data = pd.read_csv("data.csv")
-    data.head()
-    ```
-
-renders as
-
-```python
-import pandas as pd
-data = pd.read_csv("data.csv")
-data.head()
+```r
+library(ggplot2)#plot
+library(vegan)#matrix dissimilarities
+library(smacof)#SMACOF for Individual Differences
+library(stats) #multidimensional scaling
+load("your_path/dati_fmri_sub1.rData") #considering the first subject as example
 ```
 
-### Math
+and save the first run discarding the last settling volume considered as noise, and the corresponding labels stimuli:
 
-Academic supports a Markdown extension for $\LaTeX$ math. You can enable this feature by toggling the `math` option in your `config/_default/params.toml` file.
-
-To render *inline* or *block* math, wrap your LaTeX math with `$...$` or `$$...$$`, respectively.
-
-Example **math block**:
-
-```tex
-$$\gamma_{n} = \frac{ 
-\left | \left (\mathbf x_{n} - \mathbf x_{n-1} \right )^T 
-\left [\nabla F (\mathbf x_{n}) - \nabla F (\mathbf x_{n-1}) \right ] \right |}
-{\left \|\nabla F(\mathbf{x}_{n}) - \nabla F(\mathbf{x}_{n-1}) \right \|^2}$$
+```r
+sub1_run1_XX1 <-crossprod(sub1_run_X[[1]])[-121,-121]
+label_mds1 <- c(rep("scissors",12),rep("faces",12),rep("cats",12), rep("shoes",12), rep("house",12),rep("scrambledpix",12),rep("bottle",12) , rep("chair",12),rep("pausa",12),rep("pausa",12))
 ```
 
-renders as
+the object sub1_run1_XX1 is our $ X $ matrix. Then, we are ready to apply the multidimensional scaling technique.
 
-$$\gamma_{n} = \frac{ \left | \left (\mathbf x_{n} - \mathbf x_{n-1} \right )^T \left [\nabla F (\mathbf x_{n}) - \nabla F (\mathbf x_{n-1}) \right ] \right |}{\left \|\nabla F(\mathbf{x}_{n}) - \nabla F(\mathbf{x}_{n-1}) \right \|^2}$$
+# Multidimensional Scaling 
 
-Example **inline math** `$\nabla F(\mathbf{x}_{n})$` renders as $\nabla F(\mathbf{x}_{n})$.
+The $ X^\top X $ matrix, with dimension $ 120 \times 120 $ was constructed after centering the matrix $ X $. The matrix of Euclidean distances was calculated and classical multidimensional scaling was applied, thanks to the **vegan** package:
 
-Example **multi-line math** using the `\\` math linebreak:
+```r
+sub1_run1_dist_eu <-vegdist(decostand(sub1_run1_XX1,method = "standardize"),method = "euclidean") #euclidean distance
+mds <- cmdscale(sub1_run1_dist_eu) #multidimensional scaling
+mds1<-as.data.frame(cbind(mds,label_mds1)) 
+mds1$V1<-as.numeric(as.character(mds1$V1)); mds1$V2<-as.numeric(as.character(mds1$V2))
+centroids <- aggregate(cbind(V1,V2)~label_mds1,mds1,mean) #compute centroids
+```
+and then, we plot the eulidean distances and the corresponding centroids computed:
 
-```tex
-$$f(k;p_0^*) = \begin{cases} p_0^* & \text{if }k=1, \\
-1-p_0^* & \text {if }k=0.\end{cases}$$
+```r
+cols = c('red', 'blue', 'black', 'steelblue', 'green', 'pink','orange','yellow','brown')
+plot(mds1[,1],mds1[,2], type = 'n',xlab="First dimension",ylab="Second dimension",main = "First Run")
+points(mds1[,1],mds1[,2], col = cols[as.factor(mds1[,3])], pch = 18)
+points(centroids[,2:3], col = cols[as.factor(centroids[,1])], pch = 17,cex=2)
+legend('topright', col=cols, legend=levels(as.factor(mds1[,3])),pch=18, cex = 0.7)
 ```
 
-renders as
+![png](./mds.png)
 
-$$f(k;p_0^*) = \begin{cases} p_0^* & \text{if }k=1, \\
-1-p_0^* & \text {if }k=0.\end{cases}$$
 
-### Diagrams
+We can see that the multidimensional scaling technique permits to represent this heavy matrix into two-dimensional space, also, we can see that are some clusters.
+All brain activities given by a particular category of stimulus are represented in the same cluster. Then, the y-axis can describe the stimulus categories and the x-axis the various scans applied. It is a very useful plot that summarizes our multidimensional data.
+We can note, also, that the brain activities given by animate objects, as faces and cats, are closer together compared to inanimate objects, like bottles, scissors and so, but to test this aspect we need more computation that is outside of this simple tutorial.
+Another important aspect is how the representation of brain activity changes across runs. Therefore, we have applied the procedure just explained considering the runs 3, 6, 9 and 12 of the first subject:
 
-Academic supports a Markdown extension for diagrams. You can enable this feature by toggling the `diagram` option in your `config/_default/params.toml` file or by adding `diagram: true` to your page front matter.
 
-An example **flowchart**:
+![png](./plot_sub1_runALL.png)
 
-    ```mermaid
-    graph TD
-    A[Hard] -->|Text| B(Round)
-    B --> C{Decision}
-    C -->|One| D[Result 1]
-    C -->|Two| E[Result 2]
-    ```
+We can note something a little bit strange, across the time the division of cluster gets worse, probably due to loss of subject  attention.
 
-renders as
+We must note, also, that this method of multidimensional scaling applied provides the same results coming from the **principal component analysis**. Below, the code used to do the principal component analysis:
 
-```mermaid
-graph TD
-A[Hard] -->|Text| B(Round)
-B --> C{Decision}
-C -->|One| D[Result 1]
-C -->|Two| E[Result 2]
+```r
+pca <-prcomp(sub1_run1_XX1,center = TRUE,scale. = TRUE)
+PC_fmri<-data.frame(pca$x,label_mds1=label_mds1)
+centroids_PCA <- aggregate(cbind(PC1,PC2)~label_mds1,PC_fmri,mean)
+ggplot(PC_fmri,aes(x=PC1,y=PC2,color=label_mds1)) +
+  geom_point(size=3)+ geom_point(data=centroids_PCA,size=5) + scale_shape_manual(values=c(3,23)) + 
+  scale_x_reverse() + scale_colour_manual(values = cols)
 ```
 
-An example **sequence diagram**:
+![png](./plot_sub1_run1_pca.png)
 
-    ```mermaid
-    sequenceDiagram
-    Alice->>John: Hello John, how are you?
-    loop Healthcheck
-        John->>John: Fight against hypochondria
-    end
-    Note right of John: Rational thoughts!
-    John-->>Alice: Great!
-    John->>Bob: How about you?
-    Bob-->>John: Jolly good!
-    ```
+Finally, we want to see if, having reduced the dimensionality of our data, the method of multidimensional scaling preserves the original distances. In the following plot, we represent the original distances versus the distances obtained from the multidimensional scaling method:
 
-renders as
-
-```mermaid
-sequenceDiagram
-Alice->>John: Hello John, how are you?
-loop Healthcheck
-    John->>John: Fight against hypochondria
-end
-Note right of John: Rational thoughts!
-John-->>Alice: Great!
-John->>Bob: How about you?
-Bob-->>John: Jolly good!
+```r
+distOR<-dist(sub1_run1_dist_eu)
+distMDS <- dist(mds[,1:2])
+dist_plot<-as.data.frame(cbind(distMDS,distOR))
+ggplot(dist_plot,aes(x=distOR,y=distMDS))+
+  geom_point(size=3) + geom_smooth(method = "lm", se = FALSE)+
+  labs(title = "Original distance vs mds configuration distance") +
+  xlab("Original distance") + ylab("Mds distance")
 ```
 
-An example **Gantt diagram**:
+![png](./diagnosticplot_sub1_run1.png)
 
-    ```mermaid
-    gantt
-    section Section
-    Completed :done,    des1, 2014-01-06,2014-01-08
-    Active        :active,  des2, 2014-01-07, 3d
-    Parallel 1   :         des3, after des1, 1d
-    Parallel 2   :         des4, after des1, 1d
-    Parallel 3   :         des5, after des3, 1d
-    Parallel 4   :         des6, after des4, 1d
-    ```
 
-renders as
+# Individual Differences Scaling (INDSCAL) 
 
-```mermaid
-gantt
-section Section
-Completed :done,    des1, 2014-01-06,2014-01-08
-Active        :active,  des2, 2014-01-07, 3d
-Parallel 1   :         des3, after des1, 1d
-Parallel 2   :         des4, after des1, 1d
-Parallel 3   :         des5, after des3, 1d
-Parallel 4   :         des6, after des4, 1d
-```
+In this second part, the data of all 5 individuals across 12 runs are analyzed. Individual proximity matrices are aggregated into a single analysis thanks to the INDSCAL algorithm developed on the **SMACOF** (Scaling by MAjorizing a COmplicated Function) package. 
 
-An example **class diagram**:
+At first, we created the 12 matrices $ X^TX $, one for each run, considering the first subject:
 
-    ```mermaid
-    classDiagram
-    Class01 <|-- AveryLongClass : Cool
-    <<interface>> Class01
-    Class09 --> C2 : Where am i?
-    Class09 --* C3
-    Class09 --|> Class07
-    Class07 : equals()
-    Class07 : Object[] elementData
-    Class01 : size()
-    Class01 : int chimp
-    Class01 : int gorilla
-    class Class10 {
-      <<service>>
-      int id
-      size()
-    }
-    ```
-
-renders as
-
-```mermaid
-classDiagram
-Class01 <|-- AveryLongClass : Cool
-<<interface>> Class01
-Class09 --> C2 : Where am i?
-Class09 --* C3
-Class09 --|> Class07
-Class07 : equals()
-Class07 : Object[] elementData
-Class01 : size()
-Class01 : int chimp
-Class01 : int gorilla
-class Class10 {
-  <<service>>
-  int id
-  size()
+```r
+sub1_covariance <- list()
+sub_1_dist <-list()
+for (i in 1:nrun){
+  sub1_covariance[[i]] <- crossprod(sub1_run_X[[i]])
 }
 ```
 
-An example **state diagram**:
+Then, we calculate the matrix **Riemann distance** between these 12 covariances:
 
-    ```mermaid
-    stateDiagram
-    [*] --> Still
-    Still --> [*]
-    Still --> Moving
-    Moving --> Still
-    Moving --> Crash
-    Crash --> [*]
-    ```
+```r
+distR_1 <- outer(seq_along(sub1_covariance), seq_along(sub1_covariance), 
+                 FUN= Vectorize(function(i,j) distcov(sub1_covariance[[i]], sub1_covariance[[j]],method = "Riemannian")))
+```
+We redo these steps for all subjects, so, we will have 5 objects saved into the distr_all list:
 
-renders as
-
-```mermaid
-stateDiagram
-[*] --> Still
-Still --> [*]
-Still --> Moving
-Moving --> Still
-Moving --> Crash
-Crash --> [*]
+```r
+dist_all <- list(distR_1, distR_2, distR_3, distR_4, distR_5)
 ```
 
-### Todo lists
+Finally, we applied metric multidimensional scaling **INDSCAL** to these 5 matrices of dissimilarity:
 
-You can even write your todo lists in Academic too:
-
-```markdown
-- [x] Write math example
-- [x] Write diagram example
-- [ ] Do something else
+```r
+ind_fmri <- smacofIndDiff(dist_all, type = "mspline",spline.intKnots = 50,itmax = 1000,spline.degree = 5,ndim = 2)
 ```
 
-renders as
+and plot the individual differences:
 
-- [x] Write math example
-- [x] Write diagram example
-- [ ] Do something else
-
-### Tables
-
-Represent your data in tables:
-
-```markdown
-| First Header  | Second Header |
-| ------------- | ------------- |
-| Content Cell  | Content Cell  |
-| Content Cell  | Content Cell  |
+```r
+sub1_w <- as.data.frame(ind_fmri$cweights[[1]])
+sub2_w <- as.data.frame(ind_fmri$cweights[[2]])
+sub3_w <- as.data.frame(ind_fmri$cweights[[3]])
+sub4_w <- as.data.frame(ind_fmri$cweights[[4]])
+sub5_w <- as.data.frame(ind_fmri$cweights[[5]])
+plot(sub1_w[1,1],sub1_w[2,2],xlab="Weight of dimension 1",ylab="Weight of dimension 2",type = "n",main="INDSCAL weights of 5 subjects")
+text(sub1_w[1,1],sub1_w[2,2],labels = "1",cex = 1)
+text(sub2_w[1,1],sub2_w[2,2],labels = "2",cex = 1)
+text(sub3_w[1,1],sub3_w[2,2],labels = "3",cex = 1)
+text(sub4_w[1,1],sub4_w[2,2],labels = "4",cex = 1)
+text(sub5_w[1,1],sub5_w[2,2],labels = "5",cex = 1)
 ```
 
-renders as
+![png](./plot_INDSCAL_ind.png)
 
-| First Header  | Second Header |
-| ------------- | ------------- |
-| Content Cell  | Content Cell  |
-| Content Cell  | Content Cell  |
+This plot represents the similarities between brain activities of different individuals, a similarity space across 5 subjects. So, the individual 2 reacted similarly to the individual 5 but he/she is different from the individual 3. Then, homogeneities between subjects and/or any outliers could be noted.
 
-### Asides
+Therefore, this plot represents the weights of each subject into the common space plot. So, the subject 3 has a greater weight into the second dimension than the first dimension, instead, the reverse situation is found considering the subjects 2 and 5. 
 
-Academic supports a [shortcode for asides](https://sourcethemes.com/academic/docs/writing-markdown-latex/#alerts), also referred to as *notices*, *hints*, or *alerts*. By wrapping a paragraph in `{{%/* alert note */%}} ... {{%/* /alert */%}}`, it will render as an aside.
+Thanks to the following code:
 
-```markdown
-{{%/* alert note */%}}
-A Markdown aside is useful for displaying notices, hints, or definitions to your readers.
-{{%/* /alert */%}}
+```r
+plot(ind_fmri$gspace[, 1], ind_fmri$gspace[, 2],type = "p",cex=1,pch=20,col="blue",ylim = c(min(ind_fmri$gspace[, 2]),max(ind_fmri$gspace[, 2])*1.4),main = "INDSCAL Configuration",xlab = "First dimension",ylab = "Second dimension")
+text(ind_fmri$gspace[, 1], ind_fmri$gspace[, 2],pos=3,labels = c(1:12),col="blue",cex=0.85)
 ```
 
-renders as
+we can analyze the (dis)similarity calculated for each run across all individuals. We can see that the brain activities detected during the first run are far from the brain activities of the other runs:
 
-{{% alert note %}}
-A Markdown aside is useful for displaying notices, hints, or definitions to your readers.
-{{% /alert %}}
+![png](./plot_INDSCAL.png)
 
-### Did you find this page helpful? Consider sharing it 🙌
+    

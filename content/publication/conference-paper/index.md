@@ -1,50 +1,34 @@
 ---
-abstract: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere tellus
-  ac convallis placerat. Proin tincidunt magna sed ex sollicitudin condimentum. Sed
-  ac faucibus dolor, scelerisque sollicitudin nisi. Cras purus urna, suscipit quis
-  sapien eu, pulvinar tempor diam. Quisque risus orci, mollis id ante sit amet, gravida
-  egestas nisl. Sed ac tempus magna. Proin in dui enim. Donec condimentum, sem id
-  dapibus fringilla, tellus enim condimentum arcu, nec volutpat est felis vel metus.
-  Vestibulum sit amet erat at nulla eleifend gravida.
+abstract: Research has consistently shown that language abilities represent a core dimension of psychosis; however, to date, very little is known about syntactic comprehension performance in the early stages of psychosis. This study aims to compare the linguistic abilities involved in syntactic comprehension in a large group of First Episode Psychosis patients and healthy controls.
 authors:
 - admin
-- Robert Ford
-date: "2013-07-01T00:00:00Z"
+- Giuseppe Delvecchio et al.
+date: "2019-09-01T00:00:00Z"
 doi: ""
-featured: true
+featured: false
 image:
-  caption: 'Image credit: [**Unsplash**](https://unsplash.com/photos/pLCdAaMFLTE)'
+  caption: ''
   focal_point: ""
   preview_only: false
-links:
-- name: Custom Link
-  url: http://example.org
-projects:
-- internal-project
-publication: In *Source Themes Conference*
-publication_short: In *STC*
+projects: []
+publication: '*Journal of Source Themes, 1*(1)'
+publication_short: ""
 publication_types:
-- "1"
+- "2"
 publishDate: "2017-01-01T00:00:00Z"
 slides: example
-summary: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere tellus
-  ac convallis placerat. Proin tincidunt magna sed ex sollicitudin condimentum.
-
-
-
+summary: Research has consistently shown that language abilities represent a core dimension of psychosis; however, to date, very little is known about syntactic comprehension performance in the early stages of psychosis. This study aims to compare the linguistic abilities involved in syntactic comprehension in a large group of First Episode Psychosis patients and healthy controls.
 tags:
-- Source Themes
-show_homepage: true
-
-title: An example conference paper
-url_code: '#'
-url_dataset: '#'
-url_pdf: http://eprints.soton.ac.uk/352095/1/Cushen-IMV2013.pdf
-url_poster: '#'
+- Psychology
+title: Altered syntactic abilities in first episode patients, An inner phenomenon characterizing psychosis
+url_code: ""
+url_dataset: ""
+url_pdf: https://www.sciencedirect.com/science/article/abs/pii/S0924933819301245
+url_poster: ""
 url_project: ""
 url_slides: ""
-url_source: '#'
-url_video: '#'
+url_source: ""
+url_video: ""
 ---
 
 {{% alert note %}}
@@ -56,4 +40,3 @@ Click the *Slides* button above to demo Academic's Markdown slides feature.
 {{% /alert %}}
 
 Supplementary notes can be added here, including [code and math](https://sourcethemes.com/academic/docs/writing-markdown-latex/).
-

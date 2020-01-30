@@ -1,21 +1,3 @@
----
-authors:
-- admin
-categories: []
-date: "2019-02-05T00:00:00Z"
-draft: false
-featured: false
-image:
-  caption: ""
-  focal_point: ""
-lastMod: "2019-09-05T00:00:00Z"
-projects: []
-subtitle: Short tutorial on pandas, seaborn, matplotlib, sklearn and statsmodels packages
-summary: Short tutorial on pandas, seaborn, matplotlib, sklearn and statsmodels packages 
-tags: ["statsmodel", "seaborn", "Python", "Kaggle"]
-title: Introduction to Python
----
-
 
 # <span style="color:red"> FOREST FIRES IN BRAZIL </span>
 

@@ -7,87 +7,82 @@ date: "2016-04-20T00:00:00Z"
 draft: false
 featured: false
 image:
-  caption: 'Image credit: [**Unsplash**](https://unsplash.com/photos/CpkOjOcXdUY)'
+  caption: ''
   focal_point: ""
   placement: 2
   preview_only: false
 lastmod: "2019-04-17T00:00:00Z"
 projects: []
-subtitle: 'Create a beautifully simple website in under 10 minutes :rocket:'
-summary: Create a beautifully simple website in under 10 minutes.
+subtitle: 'Short list Python information'
+summary: Short list Python information
 tags:
-- Academic
-title: 'Academic: the website builder for Hugo'
+- Python
+title: 'Start with Python '
 ---
 
-**Create a free website with Academic using Markdown, Jupyter, or RStudio. Choose a beautiful color theme and build anything with the Page Builder - over 40 _widgets_, _themes_, and _language packs_ included!**
+# **Introduction to Python**
+## **To start**
 
-[Check out the latest **demo**](https://academic-demo.netlify.com/) of what you'll get in less than 10 minutes, or [view the **showcase**](https://sourcethemes.com/academic/#expo) of personal, project, and business sites.
+- There are two popular versions of Python (**2.7** and **3.5**);
 
-- 👉 [**Get Started**](#install)
-- 📚 [View the **documentation**](https://sourcethemes.com/academic/docs/)
-- 💬 [**Ask a question** on the forum](https://discourse.gohugo.io)
-- 👥 [Chat with the **community**](https://spectrum.chat/academic)
-- 🐦 Twitter: [@source_themes](https://twitter.com/source_themes) [@GeorgeCushen](https://twitter.com/GeorgeCushen) [#MadeWithAcademic](https://twitter.com/search?q=%23MadeWithAcademic&src=typd)
-- 💡 [Request a **feature** or report a **bug**](https://github.com/gcushen/hugo-academic/issues)
-- ⬆️ **Updating?** View the [Update Guide](https://sourcethemes.com/academic/docs/update/) and [Release Notes](https://sourcethemes.com/academic/updates/)
-- :heart: **Support development** of Academic:
-  - ☕️ [**Donate a coffee**](https://paypal.me/cushen)
-  - 💵 [Become a backer on **Patreon**](https://www.patreon.com/cushen)
-  - 🖼️ [Decorate your laptop or journal with an Academic **sticker**](https://www.redbubble.com/people/neutreno/works/34387919-academic)
-  - 👕 [Wear the **T-shirt**](https://academic.threadless.com/)
-  - :woman_technologist: [**Contribute**](https://sourcethemes.com/academic/docs/contribute/)
+- Ide $\rightarrow$ Pycharm, Netbeans, Eclipse etc, I suggest **Spyder** (similar to Rstudio);
 
-{{< figure src="https://raw.githubusercontent.com/gcushen/hugo-academic/master/academic.png" title="Academic is mobile first with a responsive design to ensure that your site looks stunning on every device." >}}
+- **Jupyter Notebook** $\rightarrow$ web application to create and share documents (code, formulas, text, etc);
 
-**Key features:**
+- **Anaconda** $\rightarrow$ contains R, Python, various IDE, Anaconda navigator (GUI), Anaconda Prompt and Jupyter Notebook.
 
-- **Page builder** - Create *anything* with [**widgets**](https://sourcethemes.com/academic/docs/page-builder/) and [**elements**](https://sourcethemes.com/academic/docs/writing-markdown-latex/)
-- **Edit any type of content** - Blog posts, publications, talks, slides, projects, and more!
-- **Create content** in [**Markdown**](https://sourcethemes.com/academic/docs/writing-markdown-latex/), [**Jupyter**](https://sourcethemes.com/academic/docs/jupyter/), or [**RStudio**](https://sourcethemes.com/academic/docs/install/#install-with-rstudio)
-- **Plugin System** - Fully customizable [**color** and **font themes**](https://sourcethemes.com/academic/themes/)
-- **Display Code and Math** - Code highlighting and [LaTeX math](https://en.wikibooks.org/wiki/LaTeX/Mathematics) supported
-- **Integrations** - [Google Analytics](https://analytics.google.com), [Disqus commenting](https://disqus.com), Maps, Contact Forms, and more!
-- **Beautiful Site** - Simple and refreshing one page design
-- **Industry-Leading SEO** - Help get your website found on search engines and social media
-- **Media Galleries** - Display your images and videos with captions in a customizable gallery
-- **Mobile Friendly** - Look amazing on every screen with a mobile friendly version of your site
-- **Multi-language** - 15+ language packs including English, 中文, and Português
-- **Multi-user** - Each author gets their own profile page
-- **Privacy Pack** - Assists with GDPR
-- **Stand Out** - Bring your site to life with animation, parallax backgrounds, and scroll effects
-- **One-Click Deployment** - No servers. No databases. Only files.
+## **Some tutorials**
 
-## Themes
+- <https://docs.python.org/3/tutorial/> $\rightarrow$ official python tutorial;
+- <https://courses.edx.org/courses/course-v1:UCSanDiegoX+DSE200x+1T2018/course/> $\rightarrow$ Videos, exercises, etc;
+- <http://www.pymvpa.org/tutorial.html> $\rightarrow$ Multivariate Pattern Analysis.
 
-Academic comes with **automatic day (light) and night (dark) mode** built-in. Alternatively, visitors can  choose their preferred mode - click the sun/moon icon in the top right of the [Demo](https://academic-demo.netlify.com/) to see it in action! Day/night mode can also be disabled by the site admin in `params.toml`.
+##  **Some basic information**
 
-[Choose a stunning **theme** and **font**](https://sourcethemes.com/academic/themes/) for your site. Themes are fully [customizable](https://sourcethemes.com/academic/docs/customization/#custom-theme).
+- Python uses **white space** to identify code blocks (Avoid using tabs and prefer whitespaces) $\rightarrow$ $4$ spaces per indentation level;
+- No $;$ at the end of each line;
+- No variable declaration as R;
+- assignment operator $=$, i.e not <-.
 
-## Ecosystem
+```python
+# One line comment
 
-* **[Academic Admin](https://github.com/sourcethemes/academic-admin):** An admin tool to import publications from BibTeX or import assets for an offline site
-* **[Academic Scripts](https://github.com/sourcethemes/academic-scripts):** Scripts to help migrate content to new versions of Academic
+"""
+Two lines comment
+"""
+```
 
-## Install
+## **Some useful packages**
 
-You can choose from one of the following four methods to install:
+- **Numpy** $\rightarrow$ array
 
-* [**one-click install using your web browser (recommended)**](https://sourcethemes.com/academic/docs/install/#install-with-web-browser)
-* [install on your computer using **Git** with the Command Prompt/Terminal app](https://sourcethemes.com/academic/docs/install/#install-with-git)
-* [install on your computer by downloading the **ZIP files**](https://sourcethemes.com/academic/docs/install/#install-with-zip)
-* [install on your computer with **RStudio**](https://sourcethemes.com/academic/docs/install/#install-with-rstudio)
+- **Scipy** $\rightarrow$ math (<https://docs.scipy.org/doc/scipy-0.18.1/reference/index.html>)
 
-Then [personalize and deploy your new site](https://sourcethemes.com/academic/docs/get-started/).
+- **Pandas** $\rightarrow$ dataframes (<https://pandas.pydata.org/pandas-docs/stable/>)
 
-## Updating
+- **Matplotlib** $\rightarrow$ plot (<https://matplotlib.org/>)
 
-[View the Update Guide](https://sourcethemes.com/academic/docs/update/).
+- **Seaborn** $\rightarrow$ plot (<https://seaborn.pydata.org/>)
 
-Feel free to *star* the project on [Github](https://github.com/gcushen/hugo-academic/) to help keep track of [updates](https://sourcethemes.com/academic/updates).
+- **scikit learn** $\rightarrow$ Classification, Regression, Clustering etc (<https://scikit-learn.org/stable/tutorial/index.html>)
 
-## License
+- **statmodels** $\rightarrow$ Models (<http://www.statsmodels.org/devel/index.html>)
 
-Copyright 2016-present [George Cushen](https://georgecushen.com).
+## **Install packages**
 
-Released under the [MIT](https://github.com/gcushen/hugo-academic/blob/master/LICENSE.md) license.
+- **Anaconda Prompt** $\rightarrow$ <https://anaconda.org/anaconda/repo>
+  Example: 
+```{bash, eval=FALSE}
+conda install -c conda-forge numpy
+```
+  
+- **Anaconda Navigator** $\rightarrow$ enviroments $\rightarrow$ search package
+
+In both cases, it is useful to create an **enviroments**:
+
+```{bash, eval=FALSE}
+conda create -n yourenvname python=x.x anaconda
+activate yourenvname
+```
+
+and then install packages into yourenvname.

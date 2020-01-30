@@ -1,19 +1,13 @@
 ---
-abstract: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere tellus
-  ac convallis placerat. Proin tincidunt magna sed ex sollicitudin condimentum. Sed
-  ac faucibus dolor, scelerisque sollicitudin nisi. Cras purus urna, suscipit quis
-  sapien eu, pulvinar tempor diam. Quisque risus orci, mollis id ante sit amet, gravida
-  egestas nisl. Sed ac tempus magna. Proin in dui enim. Donec condimentum, sem id
-  dapibus fringilla, tellus enim condimentum arcu, nec volutpat est felis vel metus.
-  Vestibulum sit amet erat at nulla eleifend gravida.
+abstract: Prosody comprehension deficits have been reported in major psychoses. It is still not clear whether these deficits occur at early psychosis stages. The aims of our study were to investigate the linguistic and emotional prosody comprehension abilities in First Episode Psychosis patients compared to healthy controls, the performance differences between non-affective and affective patients, and association between symptoms severity and prosodic features. 
 authors:
 - admin
-- Robert Ford
-date: "2015-09-01T00:00:00Z"
+- Elisabetta Caletti et al.
+date: "2018-10-01T00:00:00Z"
 doi: ""
 featured: false
 image:
-  caption: 'Image credit: [**Unsplash**](https://unsplash.com/photos/jdD8gXaTZsc)'
+  caption: ''
   focal_point: ""
   preview_only: false
 projects: []
@@ -23,19 +17,13 @@ publication_types:
 - "2"
 publishDate: "2017-01-01T00:00:00Z"
 slides: example
-summary: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis posuere tellus
-  ac convallis placerat. Proin tincidunt magna sed ex sollicitudin condimentum.
-
-
-
+summary: Prosody comprehension deficits have been reported in major psychoses. It is still not clear whether these deficits occur at early psychosis stages. The aims of our study were to investigate the linguistic and emotional prosody comprehension abilities in First Episode Psychosis patients compared to healthy controls, the performance differences between non-affective and affective patients, and association between symptoms severity and prosodic features. 
 tags:
-- Source Themes
-show_homepage: true
-
-title: An example journal article
+- Psychology
+title: Prosody abilities in a large sample of affective and non-affective first episode psychosis patients
 url_code: ""
 url_dataset: ""
-url_pdf: http://arxiv.org/pdf/1512.04133v1
+url_pdf: https://www.sciencedirect.com/science/article/abs/pii/S0010440X18301135#!
 url_poster: ""
 url_project: ""
 url_slides: ""
